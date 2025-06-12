@@ -12,11 +12,11 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
 
 
-# ✅ Load environment variables
+#  Load environment variables
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# ✅ Gemini Model
+#  Gemini Model
 model = genai.GenerativeModel(
     model_name="gemini-1.5-flash",
     system_instruction="Extract invoice fields exactly as shown. Preserve all field names. Never infer. Keep all keys even if empty or null."
@@ -54,11 +54,11 @@ def extract_data_from_pdf_gemini(file_path):
         if not text.strip():
             return {"error": "No text extracted from PDF."}
 
-        # ✅ Prompt to Gemini for Shipping Document Format
+        # Prompt to you file Format
         prompt = f"""
 You are a document parsing assistant. From the following shipping document text, extract the fields below into this **exact JSON structure**.
 
-⚠️ Very Strict Instructions:
+ Very Strict Instructions:
 - DO NOT rename any keys.
 - Set missing values as "" or null.
 - Use the actual words from the scanned document.
